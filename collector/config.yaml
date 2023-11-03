@@ -1,0 +1,38 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+
+exporters:
+  logging:
+    loglevel: info
+  otlphttp/jaeger:
+    endpoint: "http://jaeger:4318"
+    tls:
+      insecure: true
+  otlp/elastic:
+    endpoint: "apm-server:8200"
+    tls:
+      insecure: true
+
+service:
+  pipelines:
+    traces:
+      receivers:
+        - otlp
+      exporters:
+        - otlphttp/jaeger
+        - otlp/elastic
+    metrics:
+      receivers:
+        - otlp
+      exporters:
+        - logging
+        - otlp/elastic
+    logs:
+      receivers:
+        - otlp
+      exporters:
+        - logging
+        - otlp/elastic
