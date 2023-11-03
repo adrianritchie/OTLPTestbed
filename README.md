@@ -18,7 +18,7 @@ processors=10 # Makes the WSL 2 VM use two virtual processors
 
 ## Configure APM in Kibana:
 
-Elastic search can receive telemetry data, the APM integration needs to be update:
+In order for Elasticsearch to receive telemetry data, the APM integration needs to be updated once all the services have started:
 
 * Navigate to: http://localhost:5601/app/apm/services
 * Log in with
@@ -29,3 +29,5 @@ Elastic search can receive telemetry data, the APM integration needs to be updat
 * Click `Save and continue`
 * Click `Add Elastic Agent later`
 * Navigate to: http://localhost:5601/app/apm/services
+
+This only needs to be done when starting the services the first time.   Subsequent startup will load the Elastisearch configuration that was persisted in `./es_data`
